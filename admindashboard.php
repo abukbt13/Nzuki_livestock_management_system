@@ -2,6 +2,10 @@
 session_start();
 include 'connection.php';
 $user_id=$_SESSION['user_id'];
+$role= $_SESSION['role'];
+if($role!=1){
+    header('Location:dashboard.php?');
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -85,153 +89,28 @@ $user_id=$_SESSION['user_id'];
         <div class="sidebar">
             <ul>
                 <li id="category"> <i class="fa fa-home" aria-hidden="true"></i>Home</li>
-                <li  id="product"> <i class="fa fa-th-list" aria-hidden="true"></i>Products</li>
-                <li  id="bids"> <i class="fa fa-btc" aria-hidden="true"></i>Active Bids</li>
-                <li  id="processedbids"> <i class="fa fa-btc" aria-hidden="true"></i>Processed Bids</li>
-                <li  onclick="showUsers()"> <i class="fa fa-user" aria-hidden="true"></i>Users</li>
+                <li > <i class="fa fa-th-list" aria-hidden="true"></i><a href="uploadproduct.php">Products</a></li>
+                <li > <i class="fa fa-btc" aria-hidden="true"></i><a href="activebids.php">Active bids</a></li>
+                <li > <i class="fa fa-btc" aria-hidden="true"></i><a href="processedbids.php">Processed bids</a></li>
+                <li> <i class="fa fa-user" aria-hidden="true"></i><a href="users.php">Users</a></li>
 
             </ul>
         </div>
         <div class="content_area">
             <div class="sidebar-content" id="sidebar_content">
-                <h2>hello world</h2>
-            </div>
-            <div class="product" id="product_content">
-                    <?php include 'admin/product.php'; ?>
-            </div>
-            <div class="bids" id="bids_content">
-                <div class="active">
-                    <h2>Active  Bids</h2>
-                </div>
-                <table>
-                    <tr>
-                        <th>id</th>
-                        <th>Item Name</th>
-                        <th>Bid amount</th>
-                        <th>Date</th>
-                        <th>time</th>
-                        <th>Actions</th>
-                    </tr>
-
-                    <?php
-
-                    $items="select * from biddings where status = '0'";
-
-                    $items_run=mysqli_query($conn,$items);
-                    while($posts=mysqli_fetch_assoc($items_run)) {
-                        ?>
-
-                        <tr>
-                            <td><?php echo $posts['id']?></td>
-                            <td><?php echo $posts['item_name']?></td>
-
-                            <td><?php echo $posts['bid_amount']?></td>
-                            <td><?php echo $posts['time']?></td>
-                            <td><?php echo $posts['date']?></td>
-
-                            <td>
-                                <form action="bidprocessor.php" method="post">
-                                    <input type="number" name="bid_id" hidden="" value="<?php echo $posts['id']?>">
-                                <button type="submit" name="accept_bid" id="edit" style="text-align:center; text-transform:uppercase;background: blue;color: white; padding: 0.2rem; border:none;height: 2rem; padding-right: 1rem;"> <i class="fa fa-cancel" aria-hidden="true"></i>
-                                    Accept
-                                </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php
-                    }
+                <?php
+                if(isset($_SESSION['bid'])){
                     ?>
-
-
-                </table>
-            </div>
-            <div class="processedbids" id="bids_processedbids">
-                <div class="processed">
-                    <h2>Processed Bids</h2>
-                </div>
-                <table>
-                    <tr>
-                        <th>id</th>
-                        <th>Item Name</th>
-                        <th>Bid amount</th>
-                        <th>Date</th>
-                        <th>time</th>
-                        <th>Actions</th>
-                    </tr>
-
+                    <div>
+                            <div class="msg" style="background-color: red; color: white;padding: 0.2rem; text-transform: uppercase;">
+                                <p><?php echo $_SESSION['bid'] ?></p>
+                            </div>
+                        </div>
                     <?php
-
-                    $items="select * from biddings where status = '1'";
-
-                    $items_run=mysqli_query($conn,$items);
-                    while($posts=mysqli_fetch_assoc($items_run)) {
-                        ?>
-
-                        <tr>
-                            <td><?php echo $posts['id']?></td>
-                            <td><?php echo $posts['item_name']?></td>
-
-                            <td><?php echo $posts['bid_amount']?></td>
-                            <td><?php echo $posts['time']?></td>
-                            <td><?php echo $posts['date']?></td>
-
-                            <td>
-                                <form action="bidprocessor.php" method="post">
-                                    <input type="number" name="bid_id" hidden="" value="<?php echo $posts['id']?>">
-                                <button type="submit" name="accept_bid" id="edit" style="text-align:center; text-transform:uppercase;background: blue;color: white; padding: 0.2rem; border:none;height: 2rem; padding-right: 1rem;"> <i class="fa fa-cancel" aria-hidden="true"></i>
-                                    Restore bid
-                                </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
-
-
-                </table>
+                    unset($_SESSION['bid']);
+                }
+                ?>
             </div>
-            <div class="users" id="users_details">
-                    <h2>users View </h2>
-                <table>
-                    <tr>
-                        <th>id</th>
-                        <th>User Name</th>
-                        <th>Location</th>
-                        <th>Phone</th>
-                        <th colspan="2">Actions</th>
-                    </tr>
-
-                    <?php
-
-                    $items="select * from users where status='0'";
-
-                    $items_run=mysqli_query($conn,$items);
-                    while($posts=mysqli_fetch_assoc($items_run)) {
-                        ?>
-
-                        <tr>
-                            <td><?php echo $posts['user_id']?></td>
-                            <td><?php echo $posts['username']?></td>
-
-                            <td><?php echo $posts['town']?></td>
-                            <td><?php echo $posts['phone']?></td>
-                            <td>
-                                <form action="">
-                                    <button>Delete</button>
-                                </form>
-                            </td>
-
-
-                        </tr>
-                        <?php
-                    }
-                    ?>
-
-
-                </table>
-            </div>
-
         </div>
     </div>
 </div>

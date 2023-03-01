@@ -1,3 +1,6 @@
+<?php
+//session_start();
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -49,16 +52,28 @@
     <h3><a href="index.php">BRYTHER FARMS</a></h3>
     <ul class="ul">
         <li><a href="products.php">Products</a></li>
-        <?php if (isset($_SESSION['user_id'])){
-            echo '<li><a href="dashboard.php">Dashboard</a></li>';
-            echo '<li><a href="admindashboard.php">AdminDashboard</a></li>';
-            echo '<li><a href="logout.php">Logout</a></li>';
+        <?php
+
+        if (isset($_SESSION['role'])) {
+            $role=$_SESSION['role'];
+            if($role==1){
+                echo '<li><a href="admindashboard.php">Dashboard</a></li>';
+                echo '<li><a href="dashboard.php">Userdashboard</a></li>';
+                echo '<li><a href="logout.php">Logout</a></li>';
+
+            }
+            else{
+                echo '<li><a href="dashboard.php">Dashboard</a></li>';
+                echo '<li><a href="logout.php">Logout</a></li>';
+
+            }
+
         }
         else{
-            echo '<li><a href="signin.php">Login/Sign up</a></li>';
+            echo '<li><a href="signin.php">LOGIN</a></li>';
+
         }
         ?>
-
 
     </ul>
 

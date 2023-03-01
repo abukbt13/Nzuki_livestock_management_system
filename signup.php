@@ -2,24 +2,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="CSS_files/login-form.css">
-        <script src="JS_files/login-form.js"></script>
+     <link rel="stylesheet" href="style.css">
     </head>
     <body style="background-image:url('Images/login-background.jpg');background-size: cover;">
         <div class="container">
             <form action="processor.php" method="post">
 
-            <div class="container form bg-white pt-5 mt-4 mb-3">
-                                                            <!--change after click on sign up-->
-                <p class="text-center login-heading hide-me">SignUp</p>
-                <center><div class="col-6 pt-1 mt-1 text-center">
-                    <a href="ecommerce.html"><img src="Images/Logo_Bid.png" height="150px" class="color logo-1 logo-sift"></a>
-                  </div></center>
+
                 <div class="container hide-me">
                     <?php
                     session_start();
@@ -32,77 +21,33 @@
                         unset($_SESSION['status']);
                     }
                     ?>
-                    <div class="row">
-                        <div class="col mt-4 pl-5 pr-5">
-                            <p class="username">Email ID :</p>
-                            <div class="row mt-4">
-                                <div class="col-2 text-center pt-1 pr-0">
-                                    <i class="fa fa-user-o" aria-hidden="true" id="user"></i>
-                                </div>
-                                <div class="col-10 pl-0">
-                                    <input type="text" name="email" placeholder="Type your username" class='input-1'>
-                                </div>
-                            </div>
-                            <hr class="hr-1">
-                            <div class="hide"></div>
+                    <form method="post" action="processor.php">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
-                    </div>
-                    <div class="container hide-me">
-                        <div class="row">
-                            <div class="col mt-4 pl-5 pr-5">
-                                <p class="username">Name :</p>
-                                <div class="row mt-4">
-                                    <div class="col-2 text-center pt-1 pr-0">
-                                        <i class="fa fa-user-o" aria-hidden="true" id="user"></i>
-                                    </div>
-                                    <div class="col-10 pl-0">
-                                        <input type="text" name="username" placeholder="Type your username" class='input-1'>
-                                    </div>
-                                </div>
-                                <hr class="hr-1">
-                                <div class="hide"></div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
-                    <div class="row">
-                        <div class="col mt-4 pl-5 pr-5">
-                            <p class="username">Password :</p>
-                            <div class="row mt-4">
-                                <div class="col-2 text-center pt-1 pr-0">
-                                    <i class="fa fa-lock" aria-hidden="true" id="lock"></i>
-                                </div>
-                                <div class="col-10 pl-0">
-                                    <input type="password" name="password" placeholder="Type your password" class="input-2">
-                                </div>
-                            </div>
-                            <hr class="hr-2">
-                            <div class="hide-1"></div>
+
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mt-4 pl-5 pr-5">
-                            <p class="username">Confirm Password :</p>
-                            <div class="row mt-4">
-                                <div class="col-2 text-center pt-1 pr-0">
-                                    <i class="fa fa-lock" aria-hidden="true" id="lock"></i>
-                                </div>
-                                <div class="col-10 pl-0">
-                                    <input type="password" name="password2" placeholder="Type your password" class="input-2">
-                                </div>
-                            </div>
-                            <hr class="hr-2">
-                            <div class="hide-1"></div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Confirm Password</label>
+                            <input type="password" name="password2" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
-                    </div>
-                        <div">
-                           <button name="register" class="">SignUp</button>
-                        </div>
-            </form>
-                    <div class="row mt-1">
-                        <div class="col-12 text-center pt-3">
-                            <a href="signin.php"><span style="text-transform: capitalize;font-family: Arial, Helvetica, sans-serif;font-size:15px;font-weight:600;color:rgb(148, 141, 141)">Login</span></a>
-                        </div>
-                    </div>
-                </div>
+
+
+                        <button type="submit" name="register" class="btn btn-primary">Signup </button>
+                        <p>Already have an account </p>
+                        <a class="btn btn-secondary " href="signin.php">Click here to  Login</a>
+
+                    </form>
+
+
             </div>
         </div>
     </body>

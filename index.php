@@ -1,5 +1,10 @@
 <?php
+session_start();
+
+
+include 'connection.php';
 include 'header.php';
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,8 +24,11 @@ include 'header.php';
         height:90vh
     }
     .picture{
-
+        border-radius: 18px;
         width: 60%;
+        background-image:url("cds.jpeg");
+        background-size: cover;
+        color: beige;
     }
     .content-items{
         display: flex;
@@ -31,30 +39,33 @@ include 'header.php';
     .content-items p{
         margin-left: 1rem;
         margin-right: 1rem;
-        font-size:21px;
+        font-size:20px;
+        text-align: center;
     }
 </style>
 <div class="main-content">
                 <div class="picture">
-                    <p>Cow image</p>
-                    <img src="cow.jpeg" alt="" width="220" height="220">
+
                 </div>
                 <div class="content-items">
-                    <h2>About us</h2>
+                    <span style="font-size: 28px;">About us</span>
                     <p>
-                        <b>                        A bidding farm that deals with livestock is a type of agricultural
+
+                            A bidding farm that deals with livestock is a type of agricultural
                         operation where farmers come together to buy and sell different types of animals.
                         These farms often specialize in raising and caring
                         for a specific type of livestock, such as cows, pigs, chickens,
-                        or sheep. The bidding process at these farms allows farmers to compete for the
+                        or sheep. <br>
+                        The bidding process at these farms allows farmers to compete for the
                         animals they want to purchase, driving up the price and ensuring that the
                         animals are sold for a fair market value. The bidding process also ensures that
                         the animals are sold to the farmer who can provide the best care and resources
-                        for them. At a bidding farm, the livestock are well-cared for and are subject to regular
+                        for them.
+                        <br>At a bidding farm, the livestock are well-cared for and are subject to regular
                         health checks to ensure their well-being. These farms play an important role in the agriculture
                         industry, helping farmers to build their herds and supplying the market with high-quality,
                         healthy animals..
-                        </b>
+
 
                     </p>
 

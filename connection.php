@@ -1,8 +1,8 @@
 <?php
 $server="localhost";
-$username="root";
+$username_details="root";
 $password="Pass2022";
 $db="onlinebidding";
 
-$conn=new mysqli("$server","$username","$password","$db") or die("mysqli_error");
+$conn=new mysqli("$server","$username_details","$password","$db") or die("mysqli_error");
 ?>
