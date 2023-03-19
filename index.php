@@ -14,14 +14,14 @@ include 'header.php';
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home </title>
-</head>
+    <link rel="shortcut icon" href="https://www.example.com/my-logo.png">
+    <link rel="shortcut icon" href="bid.webp"></head>
 <body>
 <style>
     .main-content{
         display: flex;
         flex-direction: row;
         width: 100%;
-        height:90vh
     }
     .picture{
         border-radius: 18px;
@@ -42,10 +42,14 @@ include 'header.php';
         font-size:20px;
         text-align: center;
     }
+    @media screen and (max-width: 500px) and (min-width: 200px) {
+        .picture{
+            display: none;
+        }
+    }
 </style>
 <div class="main-content">
                 <div class="picture">
-
                 </div>
                 <div class="content-items">
                     <span style="font-size: 28px;">About us</span>
@@ -71,6 +75,7 @@ include 'header.php';
 
                 </div>
 </div>
+<hr>
 <?php include'footer.php'; ?>
 </body>
 </html>

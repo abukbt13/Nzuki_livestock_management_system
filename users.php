@@ -10,9 +10,10 @@ if($role!=1){
 ?>
 
 <?php include 'header.php'; ?>
-<div class="users" id="users_details">
-    <h2>users View </h2>
-    <table>
+<div class="users d-flex" id="users_details">
+    <div class="items w-100  align-items-center justify-content-center">
+        <h3>Registered users</h3>
+    <table  class="table-bordered w-75 table-hover">
         <tr>
             <th>id</th>
             <th>User Name</th>
@@ -37,7 +38,7 @@ if($role!=1){
                 <td><?php echo $posts['phone']?></td>
                 <td>
                     <form action="">
-                        <button>Delete</button>
+                        <button class="btn btn-danger">Delete</button>
                     </form>
                 </td>
 
@@ -49,4 +50,5 @@ if($role!=1){
 
 
     </table>
+    </div>
 </div>

@@ -80,11 +80,9 @@ if($role!=1){
         display: block;
     }
 </style>
+<?php include'header.php'; ?>
 <div class="container-main">
-    <div class="head">
-        <p><a href="index.php">BRYTHER FARMS</a></p>
-        <p>Administrator<i class="fa fa-caret-down" style="color: white;margin-left: 0.7rem; " aria-hidden="true"></i></p>
-    </div>
+
     <div class="contents">
         <div class="sidebar">
             <ul>
@@ -102,14 +100,43 @@ if($role!=1){
                 if(isset($_SESSION['bid'])){
                     ?>
                     <div>
-                            <div class="msg" style="background-color: red; color: white;padding: 0.2rem; text-transform: uppercase;">
-                                <p><?php echo $_SESSION['bid'] ?></p>
+                            <div class="bg-danger">
+                                <p class="text-center padding 0.5rem"><?php echo $_SESSION['bid'] ?></p>
                             </div>
                         </div>
                     <?php
                     unset($_SESSION['bid']);
                 }
                 ?>
+                <div class="admin-content d-flex gap-3 justify-content-center mt-4">
+                    <div class="products bg-info w-25">
+                        <p class="text-center"><i style="font-size: 30px;padding-top: 2rem;" class="fa fa-product-hunt" aria-hidden="true"></i>    </p>
+                        <p class="text-center">PRODUCTS</p>
+                        <div class="contents d-flex flex-column justify-content-center ms-1 ">
+                            <p class="text-center"><a href="uploadproduct.php" class="text-decoration-none">view products</a></p>
+                            <button class="btn btn-primary my-3">Generate Report</button>
+                        </div>
+                    </div>
+
+                    <div class="products bg-info w-25">
+                        <p class="text-center"><i style="font-size: 30px;padding-top: 2rem;" class="fa fa-btc" aria-hidden="true"></i>    </p>
+                        <p class="text-center">Bids</p>
+                        <div class="contents d-flex flex-column justify-content-center ms-1 ">
+                            <p class="text-center"><a href="activebids.php" class="text-decoration-none">view active bids</a></p>
+                            <button class="btn btn-primary my-3">Generate Report</button>
+                        </div>
+                    </div>
+
+                    <div class="products bg-info w-25">
+                        <p class="text-center"><i style="font-size: 30px;padding-top: 2rem;" class="fa fa-users" aria-hidden="true"></i>    </p>
+                        <p class="text-center">Users</p>
+                        <div class="contents d-flex flex-column justify-content-center ms-1 ">
+                            <p class="text-center"><a href="users.php" class="text-decoration-none">Active users</a></p>
+                            <button class="btn btn-primary my-3">Generate Report</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

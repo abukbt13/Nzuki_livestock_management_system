@@ -1,5 +1,10 @@
 <?php
 include 'connection.php';
+require 'vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
+
 if(isset($_POST["register"])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -19,9 +24,8 @@ if(isset($_POST["register"])) {
             session_start();
             $_SESSION['status'] = 'Email already exist';
             header("location:signup.php");
-        } else {
-
-
+        }
+        else {
             $save = "insert into users(username,email,password) values('$username','$email','$password')";
             $res = mysqli_query($conn, $save);
             if ($res) {
@@ -127,43 +131,84 @@ if (isset($_POST['bid'])) {
     $check_bid_run=mysqli_query($conn,$check_bid);
         $bids=mysqli_num_rows($check_bid_run);
     if($bids>0){
-        $_SESSION['status'] = 'You can not bid twice on the same product';
+        $_SESSION['prodduct'] = 'You can not bid twice on the same product';
         header('Location:products.php');
         die();
     }
     $date = date('d-m-y');
     $time = date('H:i:s');
     if ($bid_amount < $min_price) {
-        $_SESSION['status'] = 'The amount is too low';
+        $_SESSION['prodduct'] = 'The amount is too low';
         header('Location:products.php');
         die();
     }
     if ($bid_amount >= $max_price) {
-        $_SESSION['status'] = 'The amount is too high';
+        $_SESSION['prodduct'] = 'The amount is too high';
         header('Location:products.php');
         die();
     }
+    $user="select * from users where user_id = $user_id";
+    $user_run=mysqli_query($conn,$user);
+    $users=mysqli_fetch_all($user_run,MYSQLI_ASSOC);
+    foreach ($users as $user){
+        $username=$user["username"];
+        $email=$user["email"];
+    }
+        $name="Breather Farms";
+        $subject="Item bidding";
+        $body='<div style="background-color: green;color: white;padding-bottom: 1rem;padding-left: 1rem;" class="body">
+                    <h1>Breather farms</h1>
+                    <p>Thank you for bidding with us.We will contact you as soon as possible to when your bid is accepted</p>
+                    <p>Continue shopping with us</p>
+                    
+                </div>';
 
-    $save = "insert into biddings(user_id,item_name,item_id,bid_amount,time,date) values('$user_id','$item_name','$item_id','$bid_amount','$time','$date')";
-    $res = mysqli_query($conn, $save);
-    if($res){
 
-        $items="select * from items where id = $item_id";
-        $items_run = mysqli_query($conn,$items);
-        foreach ($items_run as $item);
+        $mail=new PHPMailer(true);
+//    $mail->SMTPDebug=SMTP::DEBUG_SERVER;
+        $mail->isSMTP();
+        $mail->SMTPAuth=true;
+
+        $mail->Host="smtp.gmail.com";
+
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+
+        $mail->Username="abukbt13@gmail.com";
+        $mail->Password="rsaltaemqpgmtcxl";
+
+//    $mail->setFrom($email,$name);
+        $mail->addAddress($email,$username);
+//        $mail->addAttachment(true);
+        $mail->isHTML(true);
+        $mail->Subject=$subject;
+        $mail->Body=$body;
+        $mail->send();
+        if($mail->send()){
+
+            $save = "insert into biddings(user_id,item_name,item_id,bid_amount,time,date) values('$user_id','$item_name','$item_id','$bid_amount','$time','$date')";
+            $res = mysqli_query($conn, $save);
+            if($res){
+
+                $items="select * from items where id = $item_id";
+                $items_run = mysqli_query($conn,$items);
+                foreach ($items_run as $item);
 
 
-       $itembidders=$item['bidders'];
-       $itembiddersnew=$itembidders+1;
+                $itembidders=$item['bidders'];
+                $itembiddersnew=$itembidders+1;
 
 
-        $peoplebid="update items set bidders='$itembiddersnew' where id='$item_id'";
-        $peoplebid_run=mysqli_query($conn, $peoplebid);
-        if($peoplebid_run){
-            $_SESSION['status'] = 'You have successfully bidded for the product ';
-            header('Location:products.php');
+                $peoplebid="update items set bidders='$itembiddersnew' where id='$item_id'";
+                $peoplebid_run=mysqli_query($conn, $peoplebid);
+                if($peoplebid_run){
+                    $_SESSION['prodduct'] = 'You have successfully bidded for the product ';
+                    header('Location:products.php');
+                }
+
+            }
         }
 
-    }
+
 
 }

@@ -15,17 +15,16 @@ if($role!=1){
     </div>
     <table>
         <tr>
-            <th>id</th>
-            <th>item_id</th>
-            <th>bid_id</th>
             <th>Item Name</th>
             <th>Bidded price</th>
-            <th>User Id</th>
+            <th>User Name</th>
+            <th>User Email</th>
+            <th>User Phone</th>
         </tr>
 
         <?php
 
-        $items="select * from bidded_items";
+        $items="select b.item_name,b.item_id,b.price,u.username,u.email,u.phone from bidded_items b join users u on b.user_id=u.user_id";
 
         $items_run=mysqli_query($conn,$items);
         while($posts=mysqli_fetch_assoc($items_run)) {
@@ -33,13 +32,12 @@ if($role!=1){
 
             <tr>
             <tr>
-                <td><?php echo $posts['id']?></td>
-                <td><?php echo $posts['item_id']?></td>
-                <td><?php echo $posts['bid_id']?></td>
 
                 <td><?php echo $posts['item_name']?></td>
                 <td><?php echo $posts['price']?></td>
-                <td><?php echo $posts['user_id']?></td>
+                <td><?php echo $posts['username']?></td>
+                <td><?php echo $posts['email']?></td>
+                <td><?php echo $posts['phone']?></td>
 
                 <td>
                     <form action="bidprocessor.php" method="post">

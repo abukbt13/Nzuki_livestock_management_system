@@ -10,20 +10,20 @@ if($role!=1){
 }
 ?>
 <?php include 'header.php'; ?>
-<div class="bids" id="bids_content">
-    <div class="active">
-        <h2>Active  Bids</h2>
+<div class="row mx-4 align-items-center justify-content-center" id="bids_content">
+    <div class="active d-flex justify-content-between align-items-center">
+       <h3>Active  Bids</h3>
+        <button class="btn btn-success">Generate report</button>
     </div>
-    <table>
+    <table class="table-bordered table-hover ">
         <tr>
             <th>id</th>
-            <th>Item id</th>
             <th>User id</th>
             <th>Item Name</th>
             <th>Bid amount</th>
             <th>Date</th>
             <th>time</th>
-            <th>Actions</th>
+            <th class="text-center">Actions</th>
         </tr>
 
         <?php
@@ -36,7 +36,6 @@ if($role!=1){
 
             <tr>
                 <td><?php echo $posts['id']?></td>
-                <td><?php echo $posts['item_id']?></td>
                 <td><?php echo $posts['user_id']?></td>
                 <td><?php echo $posts['item_name']?></td>
 
@@ -52,7 +51,7 @@ if($role!=1){
                         <input type="number" name="item_id" hidden="" value="<?php echo $posts['item_id']?>">
                         <input type="number" name="bid_amount" hidden="" value="<?php echo $posts['bid_amount']?>">
                         <input type="number" name="bid_id" hidden="" value="<?php echo $posts['id']?>">
-                        <button type="submit" name="accept_bid" id="edit" style="text-align:center; text-transform:uppercase;background: blue;color: white; padding: 0.2rem; border:none;height: 2rem; padding-right: 1rem;"> <i class="fa fa-cancel" aria-hidden="true"></i>
+                        <button  class="btn btn-primary mx-1 my-1" type="submit" name="accept_bid" id="edit"> <i class="fa fa-cancel" aria-hidden="true"></i>
                             Accept
                         </button>
                     </form>

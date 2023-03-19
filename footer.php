@@ -1,43 +1,57 @@
 <style>
-    .footer{
+    .bottom{
+        padding: 0.5rem;
         display: flex;
-        width: 90.8%;
-        justify-content: space-between;
-        background: #4EF9F8 ;
-        padding-left: 3rem;
-        padding-right: 3rem;
+        flex-direction: row;
+        background-color: #ced4da;
     }
-    .list li{
-        list-style: none;
+    .copyright{
+
+        background-color: #ced4da;
     }
-    i{
-        color: #fff;
-        margin-right: 1rem;
-        font-size:40px;
-        padding: 0.3rem;
+    @media screen and (max-width: 500px) and (min-width: 200px) {
+        .cot1{
+            border-bottom: 2px solid #1add;
+        }
+        .bottom{
+            padding-top: 2rem;
+            display: flex;
+            flex-direction: column;
+
+        }
     }
 </style>
-<div class="footer">
-    <div class="content1">
-        <h2>BID</h2>
+<div class="bottom">
+    <div class="cot1">
+        <p >BID</p>
         <span>For High Quality Livestock One call Away.</span><br>
         <span>We Prioritize well Being OF our Animals.</span>
+        <span>We also love our customers and we care about bid with us.</span>
+
     </div>
-    <div class="content1">
-        <h2>CONTACT</h2>
+    <div class="cot2">
+        <p>CONTACT US THROUGH </p>
         <ul class="list">
             <li>
                 <i class="fa fa-home" aria-hidden="true"></i>
                 Bryther Farms
             </li>
+            <br>
             <li>
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 nzukibreather01@gmail.com
             </li>
+            <br>
             <li>
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 + 254 758389581
             </li>
-        </ul>
+                    </ul>
     </div>
+</div>
+<div class="copyright">
+    <p style="text-align: center;">All right reserved copyrights <?php
+        $year =2023;
+        echo $year;
+        ?></p>
 </div>

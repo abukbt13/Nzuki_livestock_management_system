@@ -11,7 +11,6 @@ session_start();
 if (isset($_POST['forgetpassword'])) {
     $email = $_POST['email'];
     $otp=rand();
-    // echo $email;
     $checkemail="select email from users where email='$email'";
     $checkemail_run=mysqli_query($conn,$checkemail);
     $count=mysqli_num_rows($checkemail_run);

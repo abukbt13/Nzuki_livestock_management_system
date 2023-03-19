@@ -31,10 +31,20 @@ if(isset($_POST['upload_item'])){
         header("location:uploadproduct.php");
     }
 }
+if(isset($_POST['delete'])){
+   $id=$_POST['idno'];
+   $delete="delete from items where id='$id'";
+   $delete_run=mysqli_query($conn,$delete);
+   if($delete_run){
+       echo "<script>alert('deleted successfully')</script>";
+       $_SESSION['status']="Item Deleted successfully";
+       header("location:uploadproduct.php");
+
+   }
+}
 ?>
 <style>
     .content11{
-        /*background: #DBC0F9;*/
         position: relative;
 
 
@@ -95,12 +105,16 @@ if(isset($_POST['upload_item'])){
     }
     ?>
    <div class="topnav" style="padding-left: 1.5rem;">
-       <p>Products</p>
+       <h2>Items on bid</h2>
+       <form action="report.php">
+           <button type="submit" class="btn btn-success">Generate report</button>
+
+       </form>
        <button id="add" style="margin-right:2rem;text-transform:uppercase;background: blue;color: white; padding: 0.2rem; border:none;height: 2rem; padding-right: 1rem;"> <i class="fa fa-plus" aria-hidden="true"></i>Add more</button>
        <button id="close" style="display:none; margin-right:2rem;text-transform:uppercase;background: blue;color: white; padding: 0.2rem; border:none;height: 2rem; padding-right: 1rem;"> <i class="fa fa-close" aria-hidden="true"></i>Close</button>
    </div>
-    <table>
-        <tr>
+    <table class="table table-hover table-bordered text-center">
+        <tr class="text-center">
             <th>id</th>
             <th>Product Name</th>
             <th>Product Image</th>
@@ -118,16 +132,22 @@ if(isset($_POST['upload_item'])){
 
         <tr>
             <td><?php echo $posts['id']?></td>
-            <td><?php echo $posts['item_name']?></td>
+            <td id="post_name"><?php echo $posts['item_name']?></td>
             <td>
                 <img src="items/<?php echo $posts['photo']?>" alt="Image not found" height="100" width="100">
             </td>
             <td><?php echo $posts['min_price']?></td>
             <td>
-                <button id="edit" style="text-align:center; text-transform:uppercase;background: blue;color: white; padding: 0.2rem; border:none;height: 2rem; padding-right: 1rem;"> <i class="fa fa-plus" aria-hidden="true"></i>Edit Item</button>
+            <form action="editproduct.php"  method="post">
+                <input type="text" name="idno" hidden="" value="<?php echo $posts['id']?>">
+                <button type="submit" class="btn btn-secondary" name="edit">Edit Item</button>
+            </form>
             </td>
             <td>
-                <button id="edit" style="text-align:center;text-transform:uppercase;background: blue;color: white; padding: 0.2rem; border:none;height: 2rem; padding-right: 1rem;"> <i class="fa fa-plus" aria-hidden="true"></i>Delete Item</button>
+                <form action="uploadproduct.php"  method="post">
+                    <input type="text" name="idno" hidden="" value="<?php echo $posts['id']?>">
+                    <button type="submit" class="btn btn-danger" name="delete">Delete Item</button>
+                </form>
             </td>
         </tr>
         <?php
@@ -140,37 +160,39 @@ if(isset($_POST['upload_item'])){
 
 </div>
 
-<form class="form" id="form" action="uploadproduct.php" method="post" enctype="multipart/form-data">
-    <h2>Upload Items here for sale</h2>
+<form class="form border-2-primary" id="form" action="uploadproduct.php" method="post" enctype="multipart/form-data">
+    <h5 id="head">Upload Items For Bidding</h5>
     <div class="upload-items">
-        <div class="input-group">
-            <label for="">Item name</label><br>
-            <input type="text" name="item_name" id=""><br>
+        <div class="form-group">
+            <label for="">Description</label><br>
+            <input type="text" id="item_name" name="item_name" id="" placeholder="Description of the livestock">
         </div>
         <br>
-        <div class="input-group">
+        <div class="form-group>
             <label for="">Minimum price</label><br>
-            <input type="number" name="min_price" id="" placeholder="Enter manimum price"><br>
+            <input type="number" id="min_price" name="min_price" id="" placeholder="Enter manimum price"><br>
         </div><br>
-        <div class="input-group">
+        <div class="form-group">
             <label for="">Maximum price</label><br>
-            <input type="number" name="max_price" id="" placeholder="Enter maximum price"><br>
+            <input type="number" id="max_price" name="max_price" id="" placeholder="Enter maximum price">
         </div><br>
-        <div class="input-group">
+        <div class="form-group">
             <label for="">Livestock Name</label><br>
-            <select name="livestock_name" id="">
-                <option value="cattle">Cattle</option>
+            <select  class="form-control" id="livestock_name" name="livestock_name" id="">
+                <option>--Select livestock--</option>
                 <option value="sheep">Sheep</option>
                 <option value="goat">Goat</option>
+                <option value="cow">Cow</option>
                 <option value="donkey">Donkey</option>
-            </select><br>
-        </div><br>
-        <div class="input-group">
-            <label for="">Picture</label><br>
-            <input type="file" name="picture" id=""><br>
+            </select>
         </div>
-        <br>
-        <input type="submit" name="upload_item" value="Uploadproduct">
+        <div class="form-group">
+            <label for="">Picture</label><br>
+            <input id="picture" type="file" name="picture" id="">
+        </div>
+    <div class="form-group mt-2">
+        <input type="submit" id="submit" class="btn btn-primary form-control" name="upload_item" value="Uploadproduct">
+    </div>
     </div>
 </form>
 
@@ -189,4 +211,20 @@ if(isset($_POST['upload_item'])){
         add.style.display="block";
         close.style.display="none";
     })
+
+    // const edit_item=document.getElementById('edit_item');
+    // edit_item.addEventListener('click',()=>{
+    //     form.style.display="block";
+    //     add.style.display="none";
+    //     close.style.display="block";
+    //     const submit=document.getElementById('submit');
+    //     const item_name=document.getElementById('item_name');
+    //     const min_price=document.getElementById('min_price');
+    //     const max_price=document.getElementById('max_price');
+    //     const post_name=document.getElementById('post_name').value;
+    //     submit.value="Edit Item";
+    //     item_name.value='+post_name+';
+    //     submit.name="edit_item";
+    //
+    // })
 </script>
