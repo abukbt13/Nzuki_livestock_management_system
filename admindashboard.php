@@ -113,8 +113,12 @@ if($role!=1){
                         <p class="text-center"><i style="font-size: 30px;padding-top: 2rem;" class="fa fa-product-hunt" aria-hidden="true"></i>    </p>
                         <p class="text-center">PRODUCTS</p>
                         <div class="contents d-flex flex-column justify-content-center ms-1 ">
-                            <p class="text-center"><a href="uploadproduct.php" class="text-decoration-none">view products</a></p>
-                            <button class="btn btn-primary my-3">Generate Report</button>
+                            <p class="text-center">
+                                <a href="uploadproduct.php" class="text-decoration-none">view products</a>
+                            </p>
+
+                                <button type="submit" id="productsid" class="btn w-100 my-3 btn-primary">Generate report on Products</button>
+
                         </div>
                     </div>
 
@@ -123,7 +127,7 @@ if($role!=1){
                         <p class="text-center">Bids</p>
                         <div class="contents d-flex flex-column justify-content-center ms-1 ">
                             <p class="text-center"><a href="activebids.php" class="text-decoration-none">view active bids</a></p>
-                            <button class="btn btn-primary my-3">Generate Report</button>
+                            <button type="submit" id="bidsid" class="btn w-100 my-3 btn-primary">Generate report on Bids</button>
                         </div>
                     </div>
 
@@ -132,64 +136,85 @@ if($role!=1){
                         <p class="text-center">Users</p>
                         <div class="contents d-flex flex-column justify-content-center ms-1 ">
                             <p class="text-center"><a href="users.php" class="text-decoration-none">Active users</a></p>
-                            <button class="btn btn-primary my-3">Generate Report</button>
+                            <button type="submit" id="usersid" class="btn w-100 my-3 btn-primary">Generate report on Users</button>
                         </div>
                     </div>
 
                 </div>
+
+
             </div>
-        </div>
+            <div class="admin-content d-flex gap-3 justify-content-center mt-4">
+                <div  style="display: none;"   id="productsreport" class="products bg-info w-50 ">
+                    <div class="contents d-flex flex-column justify-content-center ms-1 ">
+                        <p class="text-center mt-2">Generate report on</p>
+                        <form action="reports/activeproducts.php">
+                            <button type="submit" class="btn w-100 my-1 btn-primary">Report on active products</button>
+                        </form>
+
+                        <form action="reports/productsonbid.php">
+                            <button type="submit" class="btn w-100 my-1   btn-primary">Report on products on bids</button>
+                        </form>
+                    </div>
+                </div>
+
+                 <div  style="display: none;"    id="bidsreport" class="products bg-info w-50 ">
+                    <div class="contents d-flex flex-column justify-content-center ms-1 ">
+                        <p class="text-center mt-2">Generate report on</p>
+                        <form action="reports/activebids.php">
+                            <button type="submit" class="btn w-100 my-1 btn-primary">Generate report on active bids</button>
+                        </form>
+                        <form action="reports/successbids.php">
+                            <button type="submit" class="btn w-100  my-1  btn-primary">Generate report on success bids</button>
+                        </form>
+
+                    </div>
+                </div>
+
+                 <div style="display: none;"  id="usersreport" class="products bg-info w-50 ">
+                    <div class="contents d-flex flex-column justify-content-center ms-1 ">
+                        <p class="text-center mt-2">Generate report on</p>
+                        <form action="reports/allusers.php">
+                            <button type="submit" class="btn w-100 my-1 btn-primary">Generate report on all users</button>
+                        </form>
+                        <form action="reports/activeusers.php">
+                            <button type="submit" class="btn w-100  my-1  btn-primary">report on active users</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            </div>
     </div>
 </div>
 <script>
-    function showUsers(){
-      const  users_details=document.getElementById("users_details");
-        users_details.classList.add('show');
-        bids_processedbids.classList.remove('show');
-        bids_content.classList.remove('show');
-        sidebar_content.style.display="none";
-        product_content.classList.remove('show');
-    }
-</script>
-<script>
-    const processedbids=document.getElementById("processedbids");
-    const bids_processedbids=document.getElementById("bids_processedbids");
 
-    processedbids.addEventListener('click',() => {
-        // alert("Product")
-        bids_processedbids.classList.add('show');
-        users_details.classList.remove('show');
-        bids_content.classList.remove('show');
-        sidebar_content.style.display="none";
-        product_content.classList.remove('show');
+
+    const productsid=document.getElementById("productsid");
+    const productsreport=document.getElementById("productsreport");
+    productsid.addEventListener('click',()=>{
+        productsreport.style.display="block"
+        bidsreport.style.display="none"
+        usersreport.style.display="none"
     })
-</script>
-<script>
-    //products
-    const product=document.getElementById("product");
-    const sidebar_content=document.getElementById("sidebar_content");
-
-    product.addEventListener('click',() => {
-        product_content.classList.add('show');
-        users_details.classList.remove('show');
-        bids_processedbids.classList.remove('show');
-        bids_content.classList.remove('show');
-        sidebar_content.style.display="none";
-
+    const bidsid=document.getElementById("bidsid");
+    const bidsreport=document.getElementById("bidsreport");
+    bidsid.addEventListener('click',()=>{
+        bidsreport.style.display="block"
+        productsreport.style.display="none"
+        usersreport.style.display="none"
+    })
+    const usersid=document.getElementById("usersid");
+    const usersreport=document.getElementById("usersreport");
+    usersid.addEventListener('click',()=>{
+        usersreport.style.display="block"
+        bidsreport.style.display="none"
+        productsreport.style.display="none"
     })
 
-</script>
 
-<script>
-    const bids=document.getElementById("bids");
-    const bids_content=document.getElementById("bids_content");
-    bids.addEventListener('click',() => {
-        bids_content.classList.add('show');
-        product_content.classList.remove('show');
-        users_details.classList.remove('show');
-        bids_processedbids.classList.remove('show');
-        sidebar_content.style.display="none";
-    })
+
+
 
 </script>
 </body>

@@ -106,10 +106,7 @@ if(isset($_POST['delete'])){
     ?>
    <div class="topnav" style="padding-left: 1.5rem;">
        <h2>Items on bid</h2>
-       <form action="report.php">
-           <button type="submit" class="btn btn-success">Generate report</button>
 
-       </form>
        <button id="add" style="margin-right:2rem;text-transform:uppercase;background: blue;color: white; padding: 0.2rem; border:none;height: 2rem; padding-right: 1rem;"> <i class="fa fa-plus" aria-hidden="true"></i>Add more</button>
        <button id="close" style="display:none; margin-right:2rem;text-transform:uppercase;background: blue;color: white; padding: 0.2rem; border:none;height: 2rem; padding-right: 1rem;"> <i class="fa fa-close" aria-hidden="true"></i>Close</button>
    </div>

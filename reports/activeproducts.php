@@ -1,7 +1,7 @@
 <?php
 // reference the Dompdf namespace
-include 'connection.php';
-require_once 'vendor/autoload.php';
+include '../connection.php';
+require_once '../vendor/autoload.php';
 $data="select * from items where status='0'";
 $datarun=mysqli_query($conn,$data);
 $rows=mysqli_fetch_all($datarun,MYSQLI_ASSOC);
@@ -11,7 +11,7 @@ $totalminprice =0;
 
 
 use Dompdf\Dompdf;
-$html='<!doctype html>
+$html= '<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,7 @@ $html='<!doctype html>
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>items on bid</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 <style>
@@ -30,7 +30,8 @@ border: 2px solid #ddd;
     <div style="background: #7C125; padding-left: 4rem;">
         <div class="tems">
 
-        <h2>Items On Bids</h2>
+        <h2 style="text-align: center;">Products On Bids</h2>
+        
         <table style="border-collapse: collapse; border: 2px solid #6AE512">
             <thead>
             <tr>

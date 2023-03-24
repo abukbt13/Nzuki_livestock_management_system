@@ -174,8 +174,8 @@ if (isset($_POST['bid'])) {
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
 
-        $mail->Username="abukbt13@gmail.com";
-        $mail->Password="rsaltaemqpgmtcxl";
+        $mail->Username="infortechnologyss@gmail.com";
+        $mail->Password="oqierjtbcjstwljl";
 
 //    $mail->setFrom($email,$name);
         $mail->addAddress($email,$username);
