@@ -3,35 +3,30 @@ include 'connection.php';
 if(isset($_POST['edit'])){
     $id=$_POST['idno'];
     }
-include 'connection.php';
 $items="select * from items where id = '$id'";
 $itemsrun=mysqli_query($conn,$items);
 
 $eachitem=mysqli_fetch_all($itemsrun,MYSQLI_ASSOC);
 foreach ($eachitem as $item){
-    $item_name=$user["item_name"];
-    $min_price=$user["min_price"];
-    $max_price=$user["max_price"];
-    $description=$user["profile_image"];
+    $item_name=$item["item_name"];
+    $min_price=$item["min_price"];
+    $max_price=$item["max_price"];
+    $photo=$item["photo"];
 }
-
 ?>
 <div class="item">
+    <button onclick="alert('fghjk')" class="btn btn-primary">javascript</button>
     <form class="form border-2-primary" id="form" action="uploadproduct.php" method="post" enctype="multipart/form-data">
         <h5 id="head">Upload Items For Bidding</h5>
         <div class="upload-items">
-            <div class="form-group">
-                <label for="">Description</label><br>
-                <input type="text" id="item_name" name="item_name" id="" placeholder="Description of the livestock">
-            </div>
-            <br>
+
             <div class="form-group>
             <label for="">Minimum price</label><br>
-            <input type="number" id="min_price" name="min_price" id="" placeholder="Enter manimum price"><br>
+            <input type="number" id="min_price" name="min_price" value="<?php echo $min_price?>" placeholder="Enter manimum price"><br>
         </div><br>
         <div class="form-group">
             <label for="">Maximum price</label><br>
-            <input type="number" id="max_price" name="max_price" id="" placeholder="Enter maximum price">
+            <input type="number" id="max_price" name="max_price"  value="<?php echo $max_price?>" placeholder="Enter maximum price">
         </div><br>
         <div class="form-group">
             <label for="">Livestock Name</label><br>
