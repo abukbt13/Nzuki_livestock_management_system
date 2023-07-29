@@ -154,37 +154,37 @@ if (isset($_POST['bid'])) {
         $username=$user["username"];
         $email=$user["email"];
     }
-        $name="Breather Farms";
-        $subject="Item bidding";
-        $body='<div style="background-color: green;color: white;padding-bottom: 1rem;padding-left: 1rem;" class="body">
-                    <h1>Breather farms</h1>
-                    <p>Thank you for bidding with us.We will contact you as soon as possible to when your bid is accepted</p>
-                    <p>Continue shopping with us</p>
+//         $name="Breather Farms";
+//         $subject="Item bidding";
+//         $body='<div style="background-color: green;color: white;padding-bottom: 1rem;padding-left: 1rem;" class="body">
+//                     <h1>Breather farms</h1>
+//                     <p>Thank you for bidding with us.We will contact you as soon as possible to when your bid is accepted</p>
+//                     <p>Continue shopping with us</p>
                     
-                </div>';
+//                 </div>';
 
 
-        $mail=new PHPMailer(true);
-//    $mail->SMTPDebug=SMTP::DEBUG_SERVER;
-        $mail->isSMTP();
-        $mail->SMTPAuth=true;
+//         $mail=new PHPMailer(true);
+// //    $mail->SMTPDebug=SMTP::DEBUG_SERVER;
+//         $mail->isSMTP();
+//         $mail->SMTPAuth=true;
 
-        $mail->Host="smtp.gmail.com";
+//         $mail->Host="smtp.gmail.com";
 
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+//         $mail->SMTPSecure = 'tls';
+//         $mail->Port = 587;
 
-        $mail->Username="infortechnologyss@gmail.com";
-        $mail->Password="oqierjtbcjstwljl";
+//         $mail->Username="infortechnologyss@gmail.com";
+//         $mail->Password="oqierjtbcjstwljl";
 
-//    $mail->setFrom($email,$name);
-        $mail->addAddress($email,$username);
-//        $mail->addAttachment(true);
-        $mail->isHTML(true);
-        $mail->Subject=$subject;
-        $mail->Body=$body;
-        $mail->send();
-        if($mail->send()){
+// //    $mail->setFrom($email,$name);
+//         $mail->addAddress($email,$username);
+// //        $mail->addAttachment(true);
+//         $mail->isHTML(true);
+//         $mail->Subject=$subject;
+//         $mail->Body=$body;
+//         $mail->send();
+//         if($mail->send()){
 
             $save = "insert into biddings(user_id,item_name,item_id,bid_amount,time,date) values('$user_id','$item_name','$item_id','$bid_amount','$time','$date')";
             $res = mysqli_query($conn, $save);
@@ -207,7 +207,7 @@ if (isset($_POST['bid'])) {
                 }
 
             }
-        }
+        // }
 
 
 

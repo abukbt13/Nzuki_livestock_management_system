@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <?php include 'header.php'; ?>
-<body style="background-image:url('Images/login-background.jpg');background-size: cover;background-color: red;height: 90vh;">
+<body style="background-image:url('Images/login-background.jpg');">
 <div class="row d-flex align-items-center justify-content-center">
 
     <div  style="width: 23rem;" class=" bg-white pt-5 mt-4 mb-3 rounded">
         <form action="processor.php" method="post">
-            <h2 style="text-align: center; border-bottom: 2px solid grey;">Register Here</h2>
+            <h2 style="text-align: center;">Register Here</h2>
             <?php
             session_start();
             if(isset($_SESSION['status'])){

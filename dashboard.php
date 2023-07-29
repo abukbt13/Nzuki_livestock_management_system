@@ -87,7 +87,7 @@ include 'header.php';
         .body{
             height: 90vh;
             background-color:#DED8D7;
-            padding:0rem 0rem 0rem 2rem;
+            /* padding:0rem 0rem 0rem 2rem; */
         }
         .main_content{
             background-color: #FFFF;
@@ -96,7 +96,7 @@ include 'header.php';
         }
         .sidebar{
             width:16rem;
-            height: 85vh;
+            height: 100vh;
             background-color: #fff3cd;
         }
         .contents li{
@@ -112,11 +112,11 @@ include 'header.php';
         .content{
             display: flex;
             flex-direction: column;
-            width: 100%;
+            /* width: 100%; */
         }
         .profile_content{
             display: none;
-            width: 22rem;
+            width: 43rem;
             border:solid 1px #faa;
         }
         .bids{
@@ -137,12 +137,11 @@ include 'header.php';
         }
     </style>
 <div class="main_content d-flex">
-    <i style="font-size: 29px;" id="bar" class="d-block d-md-none d-lg-none fa fa-bars fa-lg" aria-hidden="true"></i>
-    <div id="sidebar" class="sidebar d-none d-md-block d-lg-block" >
+    <div id="sidebar" class="sidebar d-none d-md-block d-lg-block">
         <p style="text-align: center; margin-left: 1rem;padding-top:0.5rem;text-transform: uppercase;">Dashboard</p>
         <hr>
-        <div class="profile d-flex align-items-center">
-            <img style='border-radius: 50%;' src='profiles/<?php echo$profile_image ?>' alt='Uploadprofile' width='100' height='100'>
+        <div class="profile d-flex flex-column justify-content-center align-items-center">
+            <img style='border-radius: 50%;' src='profiles/<?php echo$profile_image ?>' alt='No image' width='150' height='150'>
             <p style="text-align: center; margin-left: 1rem;margin-top: 1rem;text-transform: uppercase;"><?php echo $username; ?></p>
         </div>
         <hr>
@@ -156,7 +155,8 @@ include 'header.php';
         </div>
     </div>
     <div class="content">
-                <div style="display: flex;justify-content: center;" class="index index " id="index">
+        <i style="font-size: 29px;" id="bar" class="d-block d-md-none d-lg-none fa fa-arrow-circle-left" aria-hidden="true"></i>
+        <div style="display: flex;justify-content: center;" class="index index " id="index">
                     <div class="content">
                         <p class="text-center">Active bids</p>
                         <p class="text-center"><?php  $items="select * from biddings where user_id ='$uid' and status=0";
@@ -179,42 +179,55 @@ include 'header.php';
             </div>
 
         <div id="profile_content" class="profile_content">
-            <form  action="dashboard.php" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <input type="text" name="image" hidden="" value="<?php echo $profile_image; ?>">
-                </div>
-                <div class="form-group">
-                    <h2 style="text-align: center;">Edit profile Info</h2>
-                    <div class="" style="display: flex;align-items: center;justify-content: center;">
-                        <img style="border-radius: 50%;" src="profiles/<?php echo $profile_image; ?>" alt="profiles pic" width="100" height="100">
+              <div class="container text-center">
+                  <form  action="dashboard.php" method="post" enctype="multipart/form-data">
+
+                  <div class="row border">
+                    <div class="col border">
+                        <div class="row">
+                            <div class="col">
+                                <h2 style="text-align: center;">Edit profile Info</h2>
+                                <div class="" style="display: flex;align-items: center;justify-content: center;">
+                                    <img style="border-radius: 50%;" src="profiles/<?php echo $profile_image; ?>" alt="profiles pic" width="100" height="100">
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="form-group d-flex align-items-center flex-column m-2">
-                        <p>Change profile pic</p>
-                        <input class="inputs" class="form-control" type="file" name="profile">
+                    <div class="col border d-flex flex-column justify-content-center align-items-center">
+                        <p>My profile Name</p>
+                        <input class="inputs"  type="text" name="username" value="<?php echo $username; ?>">
                     </div>
+                 </div>
+                <div class="row border">
+                    <div class="col border d-flex  flex-column justify-content-center align-items-center">
+                        <p>Nearest Town</p>
+                        <input type="text" class="inputs"   name="town" value="<?php echo $town; ?>">
+                    </div>
+                    <div class="col border d-flex  flex-column justify-content-center align-items-center">
+                       <p>Phone Number</p>
+                        <input  class="inputs"  type="number" required name="phone" value="<?php echo $phone; ?>"><br>
 
-                         <div class="form-group d-flex align-items-center flex-column m-2">
-                            <p>User Name</p>
-                            <input class="inputs"  type="text" name="username" value="<?php echo $username; ?>">
-
-                        </div>
-                    <div class="form-group d-flex align-items-center flex-column m-2">
-                            <p style="text-align: center; font-size: 17px;text-transform: uppercase;">Nearest Home town</p>
-
-                            <input type="text" class="inputs"   name="town" value="<?php echo $town; ?>">
-                        </div>
-
-
-                    <div class="form-group d-flex align-items-center flex-column m-2">
-                            <p style="text-align: center; font-size: 17px;text-transform: uppercase;">Phone Number</p>
-                            <input  class="inputs"  type="number" required name="phone" value="<?php echo $phone; ?>"><br>
-                        </div>
-                     <div class="form-group d-flex align-items-center flex-column m-2">
-                         <button type="submit"  class="btn btn-success"  name="update_profile" >Update profile</button>
-                     </div>
+                    </div>
 
                 </div>
-            </form>
+                <div class="row border">
+
+                    <div class="col">
+                        <div class="form-group d-flex align-items-center flex-column m-2">
+                            <p>Upload new Profile image</p>
+                            <input class="inputs" class="form-control" type="file" name="profile">
+                        </div>
+                    </div>
+                    <div class="col border d-flex justify-content-center align-items-center">
+                        <buttton type="submit" name="update_profile" class="btn btn-primary">Update profile</buttton>
+                    </div>
+                </div>
+                  </form>
+
+            </div>
+        </div>
+
         </div>
         <div id="bids_content" class="bids">
 
@@ -310,6 +323,7 @@ include 'header.php';
         bids_content.style.display="block";
         success_bids.style.display="none";
         bids_content.style.display="none";
+        sidebar.classList.toggle("d-none");
     })
     const bids=document.getElementById("bids")
     const bids_content=document.getElementById("bids_content")
@@ -318,6 +332,8 @@ include 'header.php';
         index.style.display="none";
         success_bids.style.display="none";
         profile_content.style.display="none";
+        sidebar.classList.toggle("d-none");
+
     })
     const successbids=document.getElementById("successbids")
     const success_bids=document.getElementById("success_bids")
@@ -326,6 +342,8 @@ include 'header.php';
         index.style.display="none";
         bids_content.style.display="none";
         profile_content.style.display="none";
+        sidebar.classList.toggle("d-none");
+
     })
     const bar=document.getElementById("bar")
     const sidebar=document.getElementById("sidebar")
