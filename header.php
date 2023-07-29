@@ -70,7 +70,7 @@
             position: relative;
             display: flex;
             top: -6rem;
-            background: grey;
+            color:white;
             align-items: center;
             justify-content: center;
             width: 100vw;
@@ -79,15 +79,18 @@
             transition-timing-function: ease-in;
         }
         .ul li {
+            background:antiquewhite;
             list-style: none;
             margin-right: 0rem;
         }
-        .ul li a:hover{
-            background: blue;
+        .ul li a {
+            margin-left:0.4rem;
+            background-color: blue;
             color: white;
         }
         .active{
             top: 0rem;
+            right:1rem;
         }
 
     }</style>
@@ -118,7 +121,7 @@
         }
         ?>
     </ul>
-    <span class="show" id="show">Show</span>
+    <span class="my-2 show" id="show"> <i class="fa fa-bars"></i> </span>
 
 
 </div>
