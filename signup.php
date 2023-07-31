@@ -9,9 +9,9 @@
 <body style="background-image:url('Images/login-background.jpg');">
 <div class="row d-flex align-items-center justify-content-center">
 
-    <div  style="width: 23rem;" class=" bg-white pt-5 mt-4 mb-3 rounded">
+    <div  style="width: 23rem;" class="p-5 mb-5 bg-white pt-5 mt-4 mb-3 rounded">
         <form action="processor.php" method="post">
-            <h2 style="text-align: center;">Register Here</h2>
+            <h2 class="text-primary" style="text-align: center;">Register Here</h2>
             <?php
             session_start();
             if(isset($_SESSION['status'])){
@@ -23,7 +23,9 @@
                 unset($_SESSION['status']);
             }
             ?>
-                <div class="mb-3">
+            <p class="text-center text-uppercase" >Already have an account? <a  href="signin.php">Click here</a></p>
+
+            <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Username</label>
                     <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
@@ -45,7 +47,6 @@
                 <button type="submit" name="register" class="btn btn-primary w-100">Signup </button>
 
             </form>
-            <p class="text-center text-uppercase" >Already have an account? <a  href="signin.php">Click here</a></p>
     </div>
 </div>
 </div>

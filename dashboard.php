@@ -96,8 +96,13 @@ include 'header.php';
         }
         .sidebar{
             width:16rem;
-            height: 100vh;
+            height: 190vh;
             background-color: #fff3cd;
+        }
+        .sidebar li:hover{
+            background: grey;
+            color: white;
+            padding: 0.4rem;
         }
         .contents li{
             padding:0.2rem 0.2rem 0.2rem 0.2rem;
@@ -137,7 +142,7 @@ include 'header.php';
         }
     </style>
 <div class="main_content d-flex">
-    <div id="sidebar" class="sidebar d-none d-md-block d-lg-block">
+    <div style="margin-bottom: 2rem;" id="sidebar" class="sidebar  d-none d-md-block d-lg-block">
         <p style="text-align: center; margin-left: 1rem;padding-top:0.5rem;text-transform: uppercase;">Dashboard</p>
         <hr>
         <div class="profile d-flex flex-column justify-content-center align-items-center">
@@ -145,18 +150,18 @@ include 'header.php';
             <p style="text-align: center; margin-left: 1rem;margin-top: 1rem;text-transform: uppercase;"><?php echo $username; ?></p>
         </div>
         <hr>
-        <div class="contents ms-3">
+        <div class="mb-3 ms-3">
             <li  class="list-unstyled my-2" ><a href="dashboard.php" class="text-decoration-none">Home</a></li>
-            <li id="profile" class="list-unstyled my-2" id="profile"><a class="text-decoration-none">View My profile</a></li>
+            <li id="profile" class="list-unstyled my-2" id="profile"><a class="text-decoration-none">Profile</a></li>
 
             <li id="bids" class="list-unstyled my-2" id="profile"><a class="text-decoration-none">Active Bids</a></li>
-            <li id="successbids" class="list-unstyled my-2" id="profile"><a class="text-decoration-none" >Successfull Bids</a></li>
+            <li id="successbids" class="list-unstyled mb-4" id="profile"><a class="text-decoration-none" >Successfull Bids</a></li>
 
         </div>
     </div>
     <div class="content">
         <i style="font-size: 29px;" id="bar" class="d-block d-md-none d-lg-none fa fa-arrow-circle-left" aria-hidden="true"></i>
-        <div style="display: flex;justify-content: center;" class="index index " id="index">
+        <div style="display: flex; justify-content: center;" class="index index " id="index">
                     <div class="content">
                         <p class="text-center">Active bids</p>
                         <p class="text-center"><?php  $items="select * from biddings where user_id ='$uid' and status=0";
@@ -349,6 +354,7 @@ include 'header.php';
     const sidebar=document.getElementById("sidebar")
     bar.addEventListener('click', ()=>{
         sidebar.classList.toggle("d-none");
+        index.classList.toggle("flex-column");
     })
 </script>
 </div>
