@@ -22,50 +22,6 @@ foreach ($users as $user){
     $profile_image=$user["profile_image"];
 }
 
-if(isset($_POST['update_profile'])) {
-    $newusername = $_POST['username'];
-    $newtown = $_POST['town'];
-    $newphone = $_POST['phone'];
-
-    $initialpicture = $_POST['image'];
-
-
-    $profile = $_FILES['profile']['name'];
-    $profiletmp = $_FILES['profile']['tmp_name'];
-    $profile_new_name = rand() . $profile;
-
-    $path="profiles/";
-    $fullpath=$path.$initialpicture;
-
-
-    if(empty($profile)){
-
-        $update = "update users set  username='$newusername',town='$newtown',phone='$newphone' where user_id='$uid'";
-        $update_run = mysqli_query($conn, $update);
-        if ($update_run) {
-            session_start();
-            $_SESSION['status'] = 'Profile details updated successfully';
-            header('Location:dashboard.php');
-            die();
-        }
-    }
-    else{
-
-
-        $update = "update users set profile_image='$profile_new_name', username='$newusername',town='$newtown',phone='$newphone' where user_id='$uid'";
-        $update_run = mysqli_query($conn, $update);
-        if ($update_run){
-            session_start();
-            move_uploaded_file($profiletmp,"profiles/".  $profile_new_name);
-            unlink($fullpath);
-
-            $_SESSION['status'] = "Profile Updated";
-            header("Location:dashboard.php");
-        }
-
-    }
-
-}
 if(isset($_POST['cancel'])){
     echo 'hey';
     $item_id = $_POST['item_id'];
@@ -152,7 +108,7 @@ include 'header.php';
         <hr>
         <div class="mb-3 ms-3">
             <li  class="list-unstyled my-2" ><a href="dashboard.php" class="text-decoration-none">Home</a></li>
-            <li id="profile" class="list-unstyled my-2" id="profile"><a class="text-decoration-none">Profile</a></li>
+            <li id="profile" class="list-unstyled my-2" id="profile"><a href="profile.php">Profile</a></li>
 
             <li id="bids" class="list-unstyled my-2" id="profile"><a class="text-decoration-none">Active Bids</a></li>
             <li id="successbids" class="list-unstyled mb-4" id="profile"><a class="text-decoration-none" >Successfull Bids</a></li>
@@ -182,56 +138,6 @@ include 'header.php';
                     </div>
 
             </div>
-
-        <div id="profile_content" class="profile_content">
-              <div class="container text-center">
-                  <form  action="dashboard.php" method="post" enctype="multipart/form-data">
-
-                  <div class="row border">
-                    <div class="col border">
-                        <div class="row">
-                            <div class="col">
-                                <h2 style="text-align: center;">Edit profile Info</h2>
-                                <div class="" style="display: flex;align-items: center;justify-content: center;">
-                                    <img style="border-radius: 50%;" src="profiles/<?php echo $profile_image; ?>" alt="profiles pic" width="100" height="100">
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col border d-flex flex-column justify-content-center align-items-center">
-                        <p>My profile Name</p>
-                        <input class="inputs"  type="text" name="username" value="<?php echo $username; ?>">
-                    </div>
-                 </div>
-                <div class="row border">
-                    <div class="col border d-flex  flex-column justify-content-center align-items-center">
-                        <p>Nearest Town</p>
-                        <input type="text" class="inputs"   name="town" value="<?php echo $town; ?>">
-                    </div>
-                    <div class="col border d-flex  flex-column justify-content-center align-items-center">
-                       <p>Phone Number</p>
-                        <input  class="inputs"  type="number" required name="phone" value="<?php echo $phone; ?>"><br>
-
-                    </div>
-
-                </div>
-                <div class="row border">
-
-                    <div class="col">
-                        <div class="form-group d-flex align-items-center flex-column m-2">
-                            <p>Upload new Profile image</p>
-                            <input class="inputs" class="form-control" type="file" name="profile">
-                        </div>
-                    </div>
-                    <div class="col border d-flex justify-content-center align-items-center">
-                        <buttton type="submit" name="update_profile" class="btn btn-primary">Update profile</buttton>
-                    </div>
-                </div>
-                  </form>
-
-            </div>
-        </div>
 
         </div>
         <div id="bids_content" class="bids">

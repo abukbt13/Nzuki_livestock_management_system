@@ -13,7 +13,7 @@ if($role!=1){
 <div class="row mx-4 align-items-center justify-content-center" id="bids_content">
     <div class="active d-flex justify-content-between align-items-center">
        <h3>Active  Bids</h3>
-        <button class="btn btn-success">Generate report</button>
+        <a href="/reports/activebids.php" class="btn btn-success">Generate report</a>
     </div>
     <table class="table-bordered table-hover ">
         <tr>
